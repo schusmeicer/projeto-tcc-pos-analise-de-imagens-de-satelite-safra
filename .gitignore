@@ -1,0 +1,33 @@
+# ---------------------------------------------------
+# ARQUIVOS DE DADOS (Não subir para o GitHub!)
+# ---------------------------------------------------
+# Ignorar arquivos grandes e dados brutos
+data/
+!data/.gitkeep
+
+# ---------------------------------------------------
+# ARQUIVOS DE AMBIENTE E IDE
+# ---------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env
+.vscode/
+.idea/
+
+# ---------------------------------------------------
+# ARQUIVOS GERADOS E DE EXECUÇÃO
+# ---------------------------------------------------
+mlruns/
+scratch/
+testes/
+
+# ---------------------------------------------------
+# ARQUIVOS PESSOAIS / DRAFTS
+# ---------------------------------------------------
+# Bloqueia os PDFs e documentos Word do TCC da faculdade para não poluir o repositório
+*.docx
+*.pdf

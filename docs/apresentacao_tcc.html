@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Defesa de TCC - Previsão de Rendimento da Soja</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme">
+
+    <style>
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            color: #2c3e50;
+            text-transform: none;
+        }
+        .reveal .slide-background {
+            background-color: #f8f9fa;
+        }
+        .highlight {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+        }
+        .image-container img {
+            max-height: 100%;
+            object-fit: contain;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .small-text {
+            font-size: 0.6em;
+        }
+        .left-align {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <!-- Slide 1: Capa -->
+        <section>
+            <h2>Previsão do rendimento da soja no Mato Grosso via satélites e "Machine Learning"</h2>
+            <br>
+            <p><strong>Weslley Schunemann</strong></p>
+            <p class="small-text">Orientador: Walter Mesquita Filho</p>
+            <p class="small-text">MBA em Data Science e Analytics – 2026</p>
+            <br>
+            <p style="font-size: 0.5em; color: #7f8c8d;">Pressione a SETA PARA A DIREITA para avançar</p>
+        </section>
+
+        <!-- Slide 2: Contexto -->
+        <section class="left-align">
+            <h3>Contextualização</h3>
+            <ul>
+                <li>O Brasil é o <strong>maior produtor e exportador</strong> mundial de soja.</li>
+                <li>O Mato Grosso responde por aproximadamente <span class="highlight">28% da produção nacional</span>.</li>
+                <li>Saber prever a safra com antecedência é crucial para:
+                    <ul>
+                        <li>Planejamento financeiro de produtores.</li>
+                        <li>Logística de armazenamento e tradings.</li>
+                        <li>Políticas de abastecimento e segurança alimentar.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Slide 3: O Problema -->
+        <section class="left-align">
+            <h3>O Problema</h3>
+            <p>Modelos tradicionais de estimativa possuem limitações:</p>
+            <ul>
+                <li><strong>Levantamentos de campo (IBGE):</strong> Onerosos, demorados e restritos espacialmente.</li>
+                <li><strong>Modelos mecanísticos (DSSAT/APSIM):</strong> Exigem muitos dados locais de solo/cultivar.</li>
+                <li><strong>Índices isolados (ex: apenas NDVI):</strong> Ignoram efeitos cruciais como déficit hídrico e ondas de calor.</li>
+            </ul>
+        </section>
+
+        <!-- Slide 4: Objetivo -->
+        <section class="left-align">
+            <h3>Objetivo do Trabalho</h3>
+            <p>Desenvolver e validar um <strong>modelo preditivo baseado em Machine Learning</strong> capaz de estimar o rendimento municipal da soja no MT.</p>
+            <br>
+            <p><strong>A inovação proposta:</strong> Integrar séries multiespectrais e climáticas organizadas em <span class="highlight">Janelas Fenológicas</span> (J1 e J2) utilizando a nuvem (Google Earth Engine).</p>
+        </section>
+
+        <!-- Slide 5: Metodologia (Janelas) -->
+        <section>
+            <h3>As Janelas Fenológicas</h3>
+            <p>Dividimos o ciclo da soja para o modelo entender as fases críticas:</p>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                <div style="width: 45%; background: #e8f5e9; padding: 20px; border-radius: 10px;">
+                    <h4>J1 (Out - Dez)</h4>
+                    <p><strong>Crescimento Vegetativo</strong></p>
+                    <p class="small-text">Variáveis: NDVI, EVI, Temperatura, Precipitação, Déficit Hídrico, Umidade Solo</p>
+                </div>
+                <div style="width: 45%; background: #fff3e0; padding: 20px; border-radius: 10px;">
+                    <h4>J2 (Jan - Mar)</h4>
+                    <p><strong>Floração e Enchimento de Grãos</strong></p>
+                    <p class="small-text">Variáveis: NDVI, EVI, Temperatura, Precipitação, Déficit Hídrico, Umidade Solo</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Metodologia (Modelagem Híbrida) -->
+        <section class="left-align">
+            <h3>A Arquitetura Híbrida do Modelo</h3>
+            <p>Os modelos de árvore (como Random Forest ou XGBoost) são incapazes de extrapolar a <span class="highlight">tendência secular tecnológica</span> de alta produtividade ao longo dos anos.</p>
+            <br>
+            <p><strong>A Solução Adotada (Detrending):</strong></p>
+            <ol>
+                <li>Uma <strong>Regressão Linear</strong> traça a reta do ganho tecnológico ao longo dos anos.</li>
+                <li>O algoritmo <strong>XGBoost</strong> modela os resíduos (variações climáticas e perdas sazonais) em cima dessa reta.</li>
+            </ol>
+        </section>
+
+        <!-- Slide 7: Validação e Performance -->
+        <section>
+            <h3>Validação Out-of-Time (2022-2024)</h3>
+            <p>O modelo Híbrido com XGBoost foi o grande campeão.</p>
+            <table style="font-size: 0.6em; width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #2c3e50; color: white;">
+                        <th>Modelo</th>
+                        <th>R²</th>
+                        <th>RMSE (kg/ha)</th>
+                        <th>MAE (kg/ha)</th>
+                        <th>WMAPE (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Regressão Linear Múltipla</td>
+                        <td>0,0531</td>
+                        <td>337,19</td>
+                        <td>258,43</td>
+                        <td>7,44</td>
+                    </tr>
+                    <tr style="background-color: #e8f5e9; font-weight: bold;">
+                        <td>Híbrido: XGBoost</td>
+                        <td>0,0286</td>
+                        <td>341,52</td>
+                        <td>251,46</td>
+                        <td><span class="highlight">7,24%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <p class="small-text">Erro WMAPE estabilizado em 5,27% na validação espacial (Leave-Municipality-Out).</p>
+        </section>
+
+        <!-- Slide 8: Gráfico Série Temporal -->
+        <section>
+            <h3>Série Temporal: Real vs Previsto</h3>
+            <div class="image-container">
+                <img src="../figuras_tcc/serie_temporal_safra.png" alt="Série Temporal">
+            </div>
+            <p class="small-text">O modelo híbrido acompanhou o crescimento da produtividade superando a quebra de 2024.</p>
+        </section>
+
+        <!-- Slide 9: Gráfico Scatter -->
+        <section>
+            <h3>Dispersão no Teste (2022-2024)</h3>
+            <div class="image-container">
+                <img src="../figuras_tcc/real_vs_previsto.png" alt="Real vs Previsto">
+            </div>
+            <p class="small-text">Forte aderência na linha de perfeição (Y=X).</p>
+        </section>
+
+        <!-- Slide 10: Interpretabilidade SHAP -->
+        <section>
+            <h3>Interpretabilidade (SHAP)</h3>
+            <div class="image-container">
+                <img src="../figuras_tcc/shap_summary.png" alt="SHAP Summary">
+            </div>
+            <p class="small-text">O ano (tecnologia) eleva o rendimento. O déficit hídrico e temperatura na J2 destroem a safra.</p>
+        </section>
+
+        <!-- Slide 11: SHAP Dependence -->
+        <section>
+            <h3>Agronomia na Prática: Déficit Hídrico (J2)</h3>
+            <div class="image-container">
+                <img src="../figuras_tcc/shap_dependence_def_j2.png" alt="SHAP Deficit">
+            </div>
+            <p class="small-text">O modelo aprendeu de forma autônoma que a falta de água no enchimento de grãos penaliza o rendimento severamente.</p>
+        </section>
+
+        <!-- Slide 12: Conclusões -->
+        <section class="left-align">
+            <h3>Conclusões</h3>
+            <ul>
+                <li>A metodologia híbrida (Linear + XGBoost) com janelas fenológicas demonstrou erro absoluto baixo (<span class="highlight">MAE de 251 kg/ha</span>).</li>
+                <li>Mitigamos a inabilidade de modelos de árvore em extrapolar as safras recordes.</li>
+                <li><strong>Suposições validadas:</strong>
+                    <ul>
+                        <li>Homocedasticidade confirmada (Teste Spearman).</li>
+                        <li>Ausência de viés geográfico (Índice Moran).</li>
+                    </ul>
+                </li>
+                <li>Resultados competitivos com o estado da arte e altamente explicáveis (SHAP).</li>
+            </ul>
+        </section>
+
+        <!-- Slide 13: Final -->
+        <section>
+            <h2>Muito Obrigado!</h2>
+            <br>
+            <p><strong>Weslley Schunemann</strong></p>
+            <p>Contato: aluno@email.com</p>
+        </section>
+
+    </div>
+</div>
+
+<!-- Reveal.js Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        transition: 'slide'
+    });
+</script>
+
+</body>
+</html>

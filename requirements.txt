@@ -1,0 +1,16 @@
+pandas
+sidrapy
+requests
+earthengine-api
+geemap
+geobr
+scikit-learn
+xgboost
+matplotlib
+seaborn
+jupyter
+shap
+mlflow
+statsmodels
+libpysal
+esda

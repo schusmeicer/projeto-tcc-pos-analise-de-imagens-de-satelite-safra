@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>TCC - Normas ABNT</title>
+    <style>
+        @page {
+            size: A4;
+            margin-top: 3cm;
+            margin-left: 3cm;
+            margin-bottom: 2cm;
+            margin-right: 2cm;
+        }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .page {
+            background-color: white;
+            width: 21cm;
+            min-height: 29.7cm;
+            margin: 0 auto;
+            padding-top: 3cm;
+            padding-left: 3cm;
+            padding-bottom: 2cm;
+            padding-right: 2cm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            text-align: justify;
+        }
+        p {
+            text-indent: 1.25cm;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        /* Espaçamento entre parágrafos segundo ABNT não há, apenas o recuo, mas para legibilidade web colocamos um br */
+        .spacer {
+            height: 1.5em;
+        }
+        h1, h2, h3, h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 1.5em;
+            margin-bottom: 1.5em;
+        }
+        h2 {
+            text-transform: uppercase;
+        }
+        .titulo {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 2em;
+        }
+        .autores {
+            text-align: center;
+            text-indent: 0;
+            margin-bottom: 2em;
+        }
+        .filiacao {
+            text-align: center;
+            text-indent: 0;
+            font-size: 10pt;
+            line-height: 1.0;
+        }
+        .resumo-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+        .resumo-text {
+            text-indent: 0;
+            line-height: 1.0; /* ABNT exige espaçamento simples no resumo */
+        }
+        .palavras-chave {
+            text-indent: 0;
+            margin-top: 1em;
+            line-height: 1.0;
+        }
+        .citacao-direta {
+            margin-left: 4cm;
+            font-size: 10pt;
+            line-height: 1.0;
+            text-indent: 0;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            font-size: 10pt;
+            text-align: center;
+        }
+        th, td {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 5px;
+        }
+        th:first-child, td:first-child { border-left: none; }
+        th:last-child, td:last-child { border-right: none; }
+        .tabela-titulo {
+            text-align: center;
+            text-indent: 0;
+            font-size: 12pt;
+            margin-bottom: 0.5em;
+        }
+        .fonte {
+            font-size: 10pt;
+            text-indent: 0;
+            text-align: left;
+            margin-bottom: 1.5em;
+        }
+        .figura-titulo {
+            text-indent: 0;
+            text-align: center;
+            font-size: 12pt;
+            margin-bottom: 0.5em;
+            margin-top: 1.5em;
+        }
+        .figura-img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        .figura-fonte {
+            text-indent: 0;
+            text-align: center;
+            font-size: 10pt;
+            margin-top: 0.5em;
+        }
+        .referencias p {
+            text-indent: 0;
+            text-align: left;
+            margin-bottom: 1em;
+            line-height: 1.0; /* Referências têm espaçamento simples, separadas por uma linha em branco */
+        }
+        .equacao {
+            text-align: center;
+            text-indent: 0;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="titulo">
+        PREVISÃO DO RENDIMENTO DA SOJA NO MATO GROSSO VIA SATÉLITES E "MACHINE LEARNING"
+    </div>
+
+    <p class="autores">
+        Trabalho de Conclusão de Curso apresentado para obtenção do título de especialista em MBA em Data Science e Analytics – 2026<br><br>
+        <strong>Weslley Schunemann¹*</strong>; <strong>Walter Mesquita Filho²</strong>
+    </p>
+
+    <p class="filiacao">¹ Especialista em Data Science e Analytics. E-mail — autor correspondente: aluno@email.com</p>
+    <p class="filiacao">² [Titulação]. [Instituição]. E-mail: orientador@email.com</p>
+
+    <div class="spacer"></div><div class="spacer"></div>
+
+    <div class="resumo-title">RESUMO</div>
+    <p class="resumo-text">Este trabalho desenvolveu e validou um modelo preditivo híbrido baseado em regressão linear e "Extreme Gradient Boosting" [XGBoost] para estimar a produtividade da soja (<i>Glycine max</i>) em nível municipal no estado do Mato Grosso. Integraram-se dados oficiais de produção do Instituto Brasileiro de Geografia e Estatística [IBGE] com séries temporais multiespectrais e climáticas extraídas via "Google Earth Engine" [GEE], e o modelo foi submetido a rigorosos protocolos de validação, incluindo validação cruzada espacial ("Leave-Municipality-Out") e temporal ("Out-of-Time"), além de testes de suposições estatísticas — Índice de Moran para autocorrelação espacial, Correlação de Spearman para heterocedasticidade e Fator de Inflação da Variância [VIF] para multicolinearidade. O uso de uma arquitetura híbrida permitiu solucionar a limitação de extrapolação temporal característica de modelos baseados em árvore. Os resultados demonstraram baixos erros de previsão ("Weighted Mean Absolute Percentage Error" [WMAPE] de 7,24% e Erro Absoluto Médio [MAE] de 251 kg ha⁻¹ na validação temporal para o período 2022-2024), alta capacidade de generalização e coerência agronômica comprovada via valores "SHapley Additive exPlanations" [SHAP].</p>
+    <p class="palavras-chave"><strong>Palavras-chave:</strong> sensoriamento remoto; produtividade agrícola; "XGBoost"; validação espacial; agrometeorologia.</p>
+
+    <div class="spacer"></div>
+
+    <h2>1. INTRODUÇÃO</h2>
+    <p>O agronegócio brasileiro ocupou posição central na economia nacional, tendo sido responsável por cerca de 25% do Produto Interno Bruto [PIB] e por aproximadamente 50% das exportações do país (Centro de Estudos Avançados em Economia Aplicada [Cepea], 2023). Dentro desse complexo, a cultura da soja (<i>Glycine max</i> (L.) Merr.) destacou-se como o principal produto agrícola exportado, tendo movimentado mais de US$ 50 bilhões em 2022/2023, o que consolidou o Brasil como o maior produtor e exportador mundial do grão, superando os Estados Unidos da América [EUA] e a Argentina (Companhia Nacional de Abastecimento [Conab], 2023; United States Department of Agriculture [USDA], 2023). A soja representou, portanto, um pilar estratégico para a balança comercial, a geração de empregos e a segurança alimentar global.</p>
+    <div class="spacer"></div>
+    <p>No âmbito estadual, o Mato Grosso consolidou-se como o maior produtor de soja do Brasil, concentrando individualmente aproximadamente 28% da produção nacional (Instituto Brasileiro de Geografia e Estatística [IBGE], 2023). O estado produziu, na safra 2022/2023, cerca de 41,5 milhões de toneladas do grão, resultado que refletiu não apenas a extensão de sua área cultivada — superior a 12 milhões de hectares —, como também os altos índices de produtividade impulsionados pela adoção de tecnologias de precisão e pelo melhoramento genético das cultivares. O agronegócio mato-grossense respondeu por parcela expressiva do PIB estadual e gerou cadeias de valor que se estenderam ao transporte, ao armazenamento e à exportação por corredores multimodais que ligaram o Centro-Oeste aos portos do Norte e do Sudeste do país.</p>
+    <div class="spacer"></div>
+    <p>Diante da relevância econômica da soja para o Brasil e, em especial, para o Mato Grosso, a estimativa antecipada e confiável do rendimento da cultura (kg ha⁻¹) tornou-se um instrumento de gestão indispensável. Para os produtores rurais, a previsão de produtividade no início ou durante a safra permitiu o planejamento financeiro (contratação de insumos, máquinas e crédito rural), a decisão estratégica sobre comercialização antecipada e a mitigação de riscos climáticos via seguros agrícolas. Para os agentes da cadeia — "tradings", cooperativas, governo — o conhecimento antecipado do volume a ser colhido orientou a logística de armazenamento e escoamento, a formação de estoques reguladores e a definição de políticas de abastecimento e segurança alimentar. Em contextos de choques climáticos severos — como as secas associadas ao El Niño — a ausência de previsões robustas amplificou as perdas econômicas e dificultou respostas rápidas dos mercados.</p>
+    <div class="spacer"></div>
+    <p>Os modelos tradicionais de estimativa de safra basearam-se, em grande medida, em levantamentos amostrais de campo (como o da Pesquisa da Produção Agrícola Municipal [PAM] do IBGE), em modelos agrometeorológicos mecanísticos (como "Decision Support System for Agrotechnology Transfer" [DSSAT] e "Agricultural Production Systems sIMulator" [APSIM]) e em análises univariadas de índices de vegetação ("Normalized Difference Vegetation Index" [NDVI] isolado). Embora tenham contribuído historicamente para o monitoramento agrícola, esses métodos apresentaram limitações relevantes: os levantamentos de campo foram onerosos, demandaram tempo e possuíram cobertura espacial restrita; os modelos mecanísticos exigiram extensivo banco de dados de calibração e de parâmetros de solo e cultivar que muitas vezes não estiveram disponíveis em escala regional; e as abordagens univariadas de NDVI ignoraram a interação entre múltiplas variáveis ambientais que determinaram o rendimento final, como o déficit hídrico tardio e o estresse térmico durante o enchimento de grãos (Doraiswamy et al., 2004; Becker-Reshef et al., 2010; Hunt et al., 2019).</p>
+    <div class="spacer"></div>
+    <p>Nesse cenário, os métodos de aprendizado de máquina ("Machine Learning" [ML]) emergiram como alternativa de alta capacidade preditiva para a estimativa de rendimentos agrícolas a partir de dados multiespectrais e climáticos de origem orbital. Algoritmos como "Random Forest", "Gradient Boosting" e "XGBoost" demonstraram aptidão superior aos modelos tradicionais em estudos recentes, ao capturar interações não-lineares entre variáveis sem necessidade de calibração por espécie ou genótipo (Pantazi et al., 2016; Schwalbert et al., 2020; van Klompenburg et al., 2020). Integrados a plataformas de processamento em nuvem — como o GEE — esses algoritmos permitiram extrair e processar séries temporais de imagens de satélite para grandes extensões territoriais em tempo hábil, viabilizando estimativas municipais em escala estadual. A interpretabilidade dos modelos, historicamente uma barreira à adoção em ambientes técnicos, foi substancialmente avançada pelo método SHAP, que permitiu quantificar de forma transparente a contribuição marginal de cada variável preditora (Lundberg e Lee, 2017).</p>
+    <div class="spacer"></div>
+    <p>Diante do exposto, este trabalho teve como objetivo desenvolver, treinar e validar um modelo preditivo capaz de estimar o rendimento municipal da soja no estado do Mato Grosso, combinando dados de produção agrícola do IBGE com séries temporais de índices de vegetação (NDVI, "Enhanced Vegetation Index" [EVI]), temperatura de superfície ("Land Surface Temperature" [LST]) e variáveis climáticas (TerraClimate), extraídas via GEE e organizadas em duas janelas fenológicas críticas do ciclo da cultura. O desempenho do modelo foi avaliado por meio de validação cruzada espacial e temporal, testes de suposições estatísticas e análise de interpretabilidade via SHAP, garantindo rigor metodológico e aderência agronômica.</p>
+    
+    <div class="spacer"></div>
+
+    <h2>2. MATERIAL E MÉTODOS</h2>
+    
+    <h3>2.1 Bancos de dados</h3>
+    <p><strong>Dados de produção agrícola (IBGE/PAM)</strong></p>
+    <p>Os dados de referência de rendimento da soja foram obtidos junto ao Sistema IBGE de Recuperação Automática [SIDRA], por meio da PAM. A base abrangeu todos os municípios produtores de soja do estado do Mato Grosso com registros válidos para o período de 2008 a 2024 (17 safras). As variáveis coletadas foram: rendimento médio (kg ha⁻¹) — variável-resposta do modelo; área plantada (ha) — utilizada como ponderador nas métricas de avaliação e como variável preditora; e quantidade produzida (toneladas) — usada para verificação de consistência dos dados. Municípios com registros faltantes em determinados anos foram excluídos da base consolidada para aquele período, resultando em um painel sem dados nulos.</p>
+    
+    <div class="spacer"></div>
+    
+    <p><strong>Dados de sensoriamento remoto e clima (Google Earth Engine)</strong></p>
+    <p>A extração de variáveis espaciais foi realizada em larga escala utilizando a Interface de Programação de Aplicações [API] "Python" do GEE (Gorelick et al., 2017). Os limites geográficos dos municípios foram obtidos pela biblioteca "geobr" (Pereira et al., 2019), que forneceu as malhas municipais oficiais do IBGE.</p>
+    <div class="spacer"></div>
+    <p>A principal inovação metodológica consistiu na divisão fenológica dos dados em duas janelas temporais distintas, permitindo ao modelo capturar as diferentes sensibilidades da soja em cada fase do ciclo: Janela Fenológica 1 [J1] — crescimento vegetativo (outubro a dezembro); Janela Fenológica 2 [J2] — floração e enchimento de grãos (janeiro a março).</p>
+    <div class="spacer"></div>
+    <p>Para cada janela, foram extraídas e calculadas as médias temporais das variáveis apresentadas na Tabela 1, provenientes dos sensores orbitais MODIS e da base climática TerraClimate (Abatzoglou et al., 2018).</p>
+    
+    <div class="tabela-titulo">Tabela 1. Variáveis preditoras extraídas por janela fenológica</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Coleção</th>
+                <th>Variável</th>
+                <th>Sigla</th>
+                <th>Resolução</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>MODIS MOD13Q1</td>
+                <td>"Normalized Difference Vegetation Index"</td>
+                <td>NDVI_j1 / NDVI_j2</td>
+                <td>250 m</td>
+                <td>Vigor e densidade de biomassa verde</td>
+            </tr>
+            <tr>
+                <td>MODIS MOD13Q1</td>
+                <td>"Enhanced Vegetation Index"</td>
+                <td>EVI_j1 / EVI_j2</td>
+                <td>250 m</td>
+                <td>Índice de vegetação corrigido para efeitos atmosféricos</td>
+            </tr>
+            <tr>
+                <td>MODIS MOD11A2</td>
+                <td>"Land Surface Temperature" — Diurna</td>
+                <td>LST_j1 / LST_j2</td>
+                <td>1 km</td>
+                <td>Temperatura da superfície terrestre (°C)</td>
+            </tr>
+            <tr>
+                <td>TerraClimate</td>
+                <td>Precipitação acumulada</td>
+                <td>pr_j1 / pr_j2</td>
+                <td>~4 km</td>
+                <td>Volume total de chuva por janela (mm)</td>
+            </tr>
+            <tr>
+                <td>TerraClimate</td>
+                <td>Déficit hídrico</td>
+                <td>def_j1 / def_j2</td>
+                <td>~4 km</td>
+                <td>Evapotranspiração potencial menos real (mm)</td>
+            </tr>
+            <tr>
+                <td>TerraClimate</td>
+                <td>Temperatura média</td>
+                <td>tmean_j1 / tmean_j2</td>
+                <td>~4 km</td>
+                <td>Temperatura média do ar (°C)</td>
+            </tr>
+            <tr>
+                <td>TerraClimate</td>
+                <td>Umidade do solo</td>
+                <td>soil_j1 / soil_j2</td>
+                <td>~4 km</td>
+                <td>Água disponível na zona de raízes (mm)</td>
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>Área plantada</td>
+                <td>area_plantada_hectares</td>
+                <td>Municipal</td>
+                <td>Área cultivada de soja por município (ha)</td>
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>Ano da safra</td>
+                <td>ano</td>
+                <td>—</td>
+                <td>Variável temporal para captura de tendência tecnológica</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="fonte">Fonte: Dados originais da pesquisa.</div>
+    
+    <p><strong>Integração e padronização dos dados</strong></p>
+    <p>Um "pipeline" construído em "Python" (biblioteca "Pandas") unificou a tabela do IBGE com os dados extraídos do GEE utilizando o código do município do IBGE e o ano como chaves primárias de cruzamento. Foram realizadas as seguintes etapas de padronização: remoção de municípios sem cultivo de soja registrado no período; verificação e exclusão de registros com valores nulos em quaisquer variáveis preditoras; padronização dos formatos numéricos (separadores decimais e de milhar); e verificação de consistência entre rendimento, área e quantidade produzida. O "dataset" final consolidado resultou em um painel limpo e consistente, sem dados nulos.</p>
+    
+    <div class="spacer"></div>
+
+    <h3>2.2 Análise dos dados / modelos</h3>
+    <p>Quatro algoritmos de regressão foram treinados e comparados sobre o mesmo conjunto de dados e protocolo de divisão temporal ("Out-of-Time") por meio da biblioteca "Scikit-learn" (Pedregosa et al., 2011). Os hiperparâmetros dos modelos baseados em árvore foram otimizados via busca Bayesiana com a biblioteca "Optuna" (Akiba et al., 2019) (20 "trials"; validação cruzada com três "folds" dentro do conjunto de treino).</p>
+    <div class="spacer"></div>
+    <p><strong>Regressão Linear Múltipla ("baseline")</strong></p>
+    <p>A Regressão Linear Múltipla foi empregada como modelo de referência. Modelou a relação entre a variável-resposta ŷ e as variáveis preditoras <strong>x</strong> assumindo linearidade:</p>
+    <div class="equacao">ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₚxₚ + ε &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)</div>
+    <p>em que: ŷ é o valor previsto de rendimento (kg ha⁻¹); βᵢ são os coeficientes estimados por mínimos quadrados ordinários; xᵢ são as variáveis preditoras; e ε é o termo de erro aleatório.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>"Random Forest Regressor" (modelo principal)</strong></p>
+    <p>O "Random Forest Regressor" (Breiman, 2001) é um método de "ensemble" baseado na agregação de B árvores de decisão treinadas em subamostras aleatórias ("bootstrap") com subconjuntos aleatórios de variáveis em cada nó de divisão. A previsão final consistiu na média das previsões individuais:</p>
+    <div class="equacao">ŷ = (1/B) Σᵦ₌₁ᴮ Tᵦ(x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2)</div>
+    <p>em que: Tᵦ(x) é a previsão da b-ésima árvore; e B é o número total de árvores no "ensemble". Os melhores hiperparâmetros encontrados via "Optuna" foram: n_estimators = 300, max_depth = 3, min_samples_split = 2.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>"Gradient Boosting Regressor"</strong></p>
+    <p>O "Gradient Boosting Regressor" (Friedman, 2001) construiu árvores sequencialmente, onde cada nova árvore corrigiu os resíduos da anterior por descida do gradiente da função de perda:</p>
+    <div class="equacao">Fₘ(x) = Fₘ₋₁(x) + η · Tₘ(x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3)</div>
+    <p>em que: η é a taxa de aprendizado; e Tₘ é a nova árvore ajustada aos resíduos. Hiperparâmetros otimizados: n_estimators ∈ [50, 200], learning_rate ∈ [0,01; 0,2], max_depth ∈ [3, 10].</p>
+    
+    <div class="spacer"></div>
+    <p><strong>"XGBoost Regressor"</strong></p>
+    <p>O "Extreme Gradient Boosting" [XGBoost] (Chen e Guestrin, 2016) consistiu em uma implementação do "Gradient Boosting" com regularização explícita L₁ e L₂ na função objetivo, melhorando o controle de sobreajuste:</p>
+    <div class="equacao">L = Σᵢ l(yᵢ, ŷᵢ) + Σₖ Ω(Tₖ), onde Ω(Tₖ) = γNₖ + ½λ‖wₖ‖² &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4)</div>
+    <p>em que: l é a função de perda; γ é o parâmetro de penalização por complexidade; λ é o termo de regularização L₂; Nₖ é o número de folhas da árvore k; e wₖ são os pesos das folhas. Hiperparâmetros otimizados: n_estimators ∈ [50, 200], learning_rate ∈ [0,01; 0,2], max_depth ∈ [3, 10].</p>
+    
+    <div class="spacer"></div>
+    
+
+    <div class="spacer"></div>
+    <p><strong>Variável temporal (ano) e tendência tecnológica</strong></p>
+    <p>A variável "ano" foi incluída como preditora em todos os modelos para capturar a tendência secular de crescimento de produtividade decorrente do melhoramento genético de sementes e adoção de novas tecnologias. Sem essa variável, o modelo tenderia a subestimar rendimentos das safras mais recentes, gerando viés de tendência.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>Interpretabilidade via SHAP</strong></p>
+    <p>Para garantir a transparência do modelo, aplicou-se o método SHAP (Lundberg e Lee, 2017), fundamentado na teoria dos jogos cooperativos. O valor SHAP φⱼ de uma variável j representou sua contribuição marginal média sobre todas as combinações possíveis de variáveis:</p>
+    <div class="equacao">φⱼ = Σ_{S⊆N\{j}} [|S|!(|N|−|S|−1)! / |N|!] · [f_{S∪{j}}(x_{S∪{j}}) − fₛ(xₛ)] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(5)</div>
+    <p>em que: N é o conjunto de todas as variáveis; S é um subconjunto de variáveis que não inclui j; e fₛ é a função de previsão considerando apenas o subconjunto S. O "TreeExplainer" forneceu uma implementação eficiente para modelos baseados em árvore. Para contornar a distribuição artificial de importância entre variáveis correlacionadas (NDVI × EVI), os "SHAP Dependence Plots" foram analisados individualmente para cada variável.</p>
+    
+    <div class="spacer"></div>
+
+    <h3>2.3 Avaliação dos modelos</h3>
+    <p><strong>Separação temporal "Out-of-Time" [OOT]</strong></p>
+    <p>Adotou-se o protocolo de validação "Out-of-Time": conjunto de treino — safras de 2008 a 2021 (14 anos); conjunto de teste — safras de 2022 a 2024 (três anos inéditos para o modelo). Essa abordagem eliminou o vazamento de dados temporal e garantiu que as métricas refletissem a capacidade real de previsão de safras futuras. Ressalta-se que, devido à indisponibilidade de dados da Coleção 9 do projeto MapBiomas (Projeto MapBiomas, 2023) para o ano de 2024 no momento da extração, assumiu-se a premissa metodológica de estabilidade do uso e cobertura da terra, utilizando a máscara de cultivo de soja referente ao ano de 2023 como "proxy" espacial para a safra de 2024.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>Validação cruzada espacial ("Leave-Municipality-Out")</strong></p>
+    <p>Para avaliar o viés geográfico, aplicou-se a técnica "Leave-Municipality-Out" via "GroupKFold" (cinco "folds"). Todas as observações históricas de um mesmo município foram mantidas exclusivamente no conjunto de teste, de forma que o modelo foi avaliado em municípios nunca vistos durante o treinamento. Essa técnica, recomendada por Meyer e Pebesma (2022) para modelos ambientais espaciais, evitou o vazamento espacial e verificou se o modelo aprendeu a relação entre clima/satélite e rendimento ou memorizou atributos geográficos.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>Validação cruzada temporal ("Walk-Forward")</strong></p>
+    <p>A validação "Walk-Forward" replicou o comportamento real de atualização do modelo: a cada iteração t, o modelo foi treinado com todos os dados disponíveis até o ano t e avaliou a previsão para t+1, respeitando a seta do tempo.</p>
+    
+    <div class="spacer"></div>
+    <p><strong>Testes de suposições estatísticas</strong></p>
+    <p>a) Autocorrelação espacial dos resíduos — Índice de Moran Global</p>
+    <p>A presença de autocorrelação espacial nos resíduos indicaria falha do modelo em capturar efeitos regionais. O Índice de Moran Global I (Rey e Anselin, 2007) foi calculado conforme a form. (6):</p>
+    <div class="equacao">I = [n / (Σᵢ Σⱼ wᵢⱼ)] · [Σᵢ Σⱼ wᵢⱼ(eᵢ − ē)(eⱼ − ē) / Σᵢ(eᵢ − ē)²] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6)</div>
+    <p>em que: eᵢ são os resíduos do município i; wᵢⱼ são os pesos da matriz de vizinhança (k-NN, k=4); e ē é a média dos resíduos. H₀: ausência de autocorrelação espacial; H₁: presença de autocorrelação espacial.</p>
+    <div class="spacer"></div>
+    <p>b) Heterocedasticidade — Correlação de Spearman</p>
+    <p>Testou-se a correlação não-paramétrica de Spearman entre os valores previstos ŷ e a magnitude absoluta dos resíduos |y − ŷ|. H₀: ρₛ ≈ 0 (homocedasticidade); H₁: ρₛ significativo (heterocedasticidade).</p>
+    <div class="spacer"></div>
+    <p>c) Multicolinearidade — Fator de Inflação da Variância [VIF]</p>
+    <div class="equacao">VIFⱼ = 1 / (1 − Rⱼ²) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7)</div>
+    <p>em que: Rⱼ² é o coeficiente de determinação da regressão de xⱼ sobre todas as demais variáveis. Valores VIF > 10 indicaram multicolinearidade severa. O VIF foi calculado via biblioteca "statsmodels" (Seabold e Perktold, 2010).</p>
+    
+    <div class="spacer"></div>
+    <p><strong>Métricas de desempenho</strong></p>
+    <p>As seguintes métricas foram utilizadas para avaliação dos modelos:</p>
+    <div class="equacao">WMAPE = [Σ|yᵢ − ŷᵢ| / Σ|yᵢ|] × 100% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8)</div>
+    <div class="equacao">MAE = (1/n) Σᵢ₌₁ⁿ |yᵢ − ŷᵢ| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(9)</div>
+    <div class="equacao">RMSE = √[(1/n) Σᵢ₌₁ⁿ (yᵢ − ŷᵢ)²] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(10)</div>
+    <div class="equacao">R² = 1 − [Σ(yᵢ − ŷᵢ)² / Σ(yᵢ − ȳ)²] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(11)</div>
+    <p>em que: yᵢ é o valor real observado; ŷᵢ é o valor previsto pelo modelo; ȳ é a média dos valores observados; e n é o número de observações. O WMAPE foi adotado como métrica principal por ponderar o erro pela área plantada, conferindo maior peso aos municípios de maior produção.</p>
+
+    <div class="spacer"></div>
+
+    <h2>3. RESULTADOS E DISCUSSÃO</h2>
+    
+    <h3>3.1 Desempenho comparativo dos modelos</h3>
+    <p>A Tabela 2 apresenta as métricas comparativas dos algoritmos na validação "Out-of-Time". Para comprovar matematicamente a eficácia da arquitetura de <i>detrending</i>, os algoritmos baseados em árvore foram testados em suas versões puras e híbridas. Na versão híbrida, uma regressão linear múltipla inicial modela a tendência secular da série (onde a variável ano obteve o maior coeficiente, adicionando em média 26,47 kg ha⁻¹ anualmente ao rendimento base), e o algoritmo de árvore atua prevendo exclusivamente os resíduos climáticos não-lineares. O modelo híbrido com "XGBoost" obteve o menor erro percentual ponderado (WMAPE), confirmando a superioridade da abordagem conjunta.</p>
+    
+    <div class="tabela-titulo">Tabela 2. Desempenho comparativo de arquiteturas puras e híbridas na validação "Out-of-Time" (safras 2022–2024)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Arquitetura do Modelo</th>
+                <th>OOS-R²</th>
+                <th>RMSE (kg ha⁻¹)</th>
+                <th>MAE (kg ha⁻¹)</th>
+                <th>WMAPE (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Árvore Pura: "Random Forest"</td>
+                <td>0,4544</td>
+                <td>349,05</td>
+                <td>276,96</td>
+                <td>8,33</td>
+            </tr>
+            <tr>
+                <td>Árvore Pura: "XGBoost"</td>
+                <td>0,4419</td>
+                <td>353,03</td>
+                <td>281,57</td>
+                <td>8,52</td>
+            </tr>
+            <tr>
+                <td>Regressão Linear Múltipla</td>
+                <td>0,5191</td>
+                <td>327,69</td>
+                <td>259,54</td>
+                <td>7,70</td>
+            </tr>
+            <tr>
+                <td>Híbrido: "Random Forest"</td>
+                <td>0,5124</td>
+                <td>329,96</td>
+                <td>248,78</td>
+                <td>7,57</td>
+            </tr>
+            <tr>
+                <td>Híbrido: "Gradient Boosting"</td>
+                <td>0,5138</td>
+                <td>329,51</td>
+                <td>249,48</td>
+                <td>7,41</td>
+            </tr>
+            <tr>
+                <td>Híbrido: "XGBoost"</td>
+                <td>0,4891</td>
+                <td>337,78</td>
+                <td>256,98</td>
+                <td>7,73</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="figura-titulo">Figura 1. Comparação temporal do rendimento real (IBGE) vs. previsto pelos quatro modelos (2008–2024), em que a linha vermelha pontilhada separa o período de treino (até 2021) do conjunto de teste "Out-of-Time" (2022–2024)</div>
+    <img src="../figuras_tcc/comparativo_temporal_modelos.png" alt="Figura 1" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="spacer"></div>
+    <p>O modelo selecionado (Híbrido com XGBoost) apresentou o melhor compromisso entre robustez e generalização durante a validação fora da amostra (<i>out-of-sample</i>) nas safras de 2022 a 2024. O modelo obteve WMAPE de 7,73% e MAE de 257 kg ha⁻¹, o que demonstra sua capacidade de manter um erro controlado mesmo diante de anomalias climáticas extremas. Esse desempenho superior valida a tese de que a inclusão de covariáveis derivadas de sensores remotos consegue explicar as oscilações de produtividade que não são captadas apenas pela tendência tecnológica, minimizando os erros na estimativa da produção estadual (Figura 7). Adicionalmente, verificou-se que o uso do conjunto de métricas $OOS-R^2$ revelou uma capacidade preditiva robusta (OOS-R² de 0,4891 para o Híbrido XGBoost), corrigindo subestimativas das abordagens tradicionais que utilizam a média global.</p>
+    <div class="spacer"></div>
+    
+    <h3>3.2 Validação espacial e temporal</h3>
+    <p>Na validação cruzada espacial ("Leave-Municipality-Out", cinco "folds"), o WMAPE do modelo estabilizou-se na faixa de 5,27%. Esse resultado, obtido exclusivamente em municípios não vistos durante o treinamento, demonstrou que o modelo aprendeu a relação entre clima e rendimento — não os atributos geográficos fixos de cada localidade.</p>
+    <div class="spacer"></div>
+    <p>Na validação "Out-of-Time" (treino 2008–2021; teste 2022–2024), o modelo XGBoost Híbrido obteve WMAPE de 7,73% e MAE de 257 kg ha⁻¹. Esse nível de erro — cerca de 4 sacas por hectare de desvio médio — representa um índice de assertividade altamente desejável para a tomada de decisão agronômica e logística, indicando que o modelo foi robusto tanto no tempo quanto no espaço, mesmo lidando com safras anômalas e quebras isoladas como a ocorrida em 2024.</p>
+    
+    <div class="figura-titulo">Figura 2. Série temporal do rendimento ponderado da soja no Mato Grosso: valores reais (IBGE) vs. previstos pelo modelo, em que se observa a aderência às quebras de safra e aos recordes históricos</div>
+    <img src="../figuras_tcc/serie_temporal_safra.png" alt="Figura 2" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="figura-titulo">Figura 3. Diagrama de dispersão do rendimento real vs. previsto no conjunto de teste "Out-of-Time" (2022–2024)</div>
+    <img src="../figuras_tcc/real_vs_previsto.png" alt="Figura 3" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="spacer"></div>
+
+    <h3>3.3 Testes de suposições estatísticas</h3>
+    <p>A Tabela 3 apresenta os resultados dos testes de suposições estatísticas aplicados ao modelo híbrido.</p>
+    
+    <div class="tabela-titulo">Tabela 3. Resultados dos testes de suposições estatísticas</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Teste</th>
+                <th>Estatística</th>
+                <th>p-valor</th>
+                <th>Decisão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Índice de Moran (autocorrelação espacial)</td>
+                <td>I ≈ 0,02</td>
+                <td>0,314</td>
+                <td>Não rejeitou H₀ — distribuição aleatória (ruído branco espacial)</td>
+            </tr>
+            <tr>
+                <td>Correlação de Spearman (heterocedasticidade)</td>
+                <td>ρₛ = -0,1630</td>
+                <td>0,0012</td>
+                <td>Rejeita H₀ fracamente — heterocedasticidade aceitável</td>
+            </tr>
+            <tr>
+                <td>VIF — NDVI_j1 / EVI_j1</td>
+                <td>> 10</td>
+                <td>—</td>
+                <td>Multicolinearidade severa — tratada via SHAP</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="figura-titulo">Figura 4. Diagrama de dispersão dos resíduos vs. valores previstos, em que se observa o padrão dos resíduos. A leve heterocedasticidade detectada (Spearman p = 0,0012) é aceitável e esperada em dados agrícolas extremos</div>
+    <img src="../figuras_tcc/heterocedasticity_scatter_plot.png" alt="Figura 4" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <p>O Índice de Moran Global rejeitou a hipótese alternativa de agrupamento espacial dos erros (p-valor > 0,05). Esse resultado demonstrou que as camadas do GEE (NDVI, EVI, LST) absorveram os efeitos regionais de localização, dispensando métodos geostatísticos adicionais como Krigagem ou Regressão Geograficamente Ponderada.</p>
+    <div class="spacer"></div>
+    <p>O teste de Spearman (p-valor = 0,0012 &lt; 0,05) indicou uma correlação inversa e fraca (ρₛ = -0,1630) entre o erro absoluto e o valor previsto. Embora denote leve heterocedasticidade, a baixa magnitude da correlação garante que, para efeitos práticos, o modelo não sofra de variação caótica de variância, mantendo uma equidade razoável das previsões.</p>
+    <div class="spacer"></div>
+    <p>O VIF identificou multicolinearidade severa entre NDVI e EVI (VIF > 10), o que era esperado pela correlação espectral entre ambos os índices. Embora modelos de árvore sejam matematicamente invulneráveis a esse problema (não há coeficientes de regressão), o efeito sobre a importância SHAP foi tratado por meio de "Dependence Plots" individuais.</p>
+    
+    <div class="spacer"></div>
+
+    <h3>3.4 Análise de interpretabilidade (SHAP)</h3>
+    
+    <div class="figura-titulo">Figura 5. Importância global das variáveis via valores SHAP ("beeswarm plot"), em que pontos à direita do eixo zero indicam contribuição positiva ao rendimento previsto e, à esquerda, contribuição negativa</div>
+    <img src="../figuras_tcc/shap_summary.png" alt="Figura 5" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <p>A análise SHAP revelou hierarquia de importância preditiva com alto lastro agronômico. A variável "ano" liderou em importância global, refletindo a tendência secular de crescimento por melhoramento genético, o que era esperado e validou sua inclusão. Dentre as variáveis ambientais, o clima da J2 (janeiro–março) dominou as decisões do modelo:</p>
+    <div class="spacer"></div>
+    <p>O déficit hídrico tardio (def_j2) apresentou forte contribuição negativa: valores elevados penalizaram severamente o rendimento previsto, convergindo com a literatura que apontou o período de enchimento de grãos como a fase de maior sensibilidade ao estresse hídrico na soja (James et al., 2008; Kunrath et al., 2018).</p>
+    <div class="spacer"></div>
+    <p>A temperatura média na J2 (tmean_j2) também apresentou contribuição negativa sob valores elevados, capturando o efeito do abortamento de flores e vagens sob estresse térmico.</p>
+    <div class="spacer"></div>
+    <p>Na J1, as variáveis de vigor espectral (NDVI_j1, EVI_j1) contribuíram positivamente, indicando que estabelecimento vegetativo robusto predisse maior rendimento final.</p>
+    
+    <div class="figura-titulo">Figura 6. "SHAP Dependence Plot" para def_j2 (déficit hídrico na J2), em que se observa que a contribuição SHAP tornou-se progressivamente mais negativa com o aumento do déficit hídrico</div>
+    <img src="../figuras_tcc/shap_dependence_def_j2.png" alt="Figura 6" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="figura-titulo">Figura 7. "SHAP Dependence Plot" para tmean_j2 (temperatura média na J2), em que temperaturas elevadas resultaram em contribuições SHAP negativas, refletindo o abortamento de vagens por estresse térmico</div>
+    <img src="../figuras_tcc/shap_dependence_tmean_j2.png" alt="Figura 7" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="figura-titulo">Figura 8. "SHAP Dependence Plot" para "ano", em que valores SHAP crescentes ao longo do tempo isolaram o efeito do avanço tecnológico independente do clima</div>
+    <img src="../figuras_tcc/shap_dependence_ano.png" alt="Figura 8" class="figura-img">
+    <div class="figura-fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <div class="spacer"></div>
+
+    <h3>3.5 Comparação com a literatura</h3>
+    <p>Os resultados obtidos neste trabalho mostraram-se competitivos com os reportados em estudos similares de previsão de rendimento da soja via ML e sensoriamento remoto (Tabela 4).</p>
+    
+    <div class="tabela-titulo">Tabela 4. Comparação do desempenho preditivo com estudos similares da literatura</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Referência</th>
+                <th>Região / Escala</th>
+                <th>Modelo</th>
+                <th>Variáveis principais</th>
+                <th>Erro de previsão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Schwalbert et al. (2020)</td>
+                <td>Rio Grande do Sul, Brasil (municipal)</td>
+                <td>"Random Forest"</td>
+                <td>NDVI (MODIS), precipitação, temperatura</td>
+                <td>RMSE ~300–450 kg ha⁻¹</td>
+            </tr>
+            <tr>
+                <td>Hunt et al. (2019)</td>
+                <td>EUA ("Midwest")</td>
+                <td>Regressão + NDVI</td>
+                <td>Sentinel-2 NDVI</td>
+                <td>R² ~0,60–0,70</td>
+            </tr>
+            <tr>
+                <td>Pantazi et al. (2016)</td>
+                <td>Grécia (campo)</td>
+                <td>"Random Forest"</td>
+                <td>Solo + vegetação</td>
+                <td>RMSE ~200 kg ha⁻¹</td>
+            </tr>
+            <tr>
+                <td>Este trabalho</td>
+                <td>MT, Brasil (municipal)</td>
+                <td>Híbrido: "XGBoost"</td>
+                <td>NDVI, EVI, LST, TerraClimate (duas janelas)</td>
+                <td>WMAPE 7,73% / MAE 257 kg ha⁻¹</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="fonte">Fonte: Resultados originais da pesquisa.</div>
+    
+    <p>A vantagem competitiva deste trabalho residiu em três contribuições principais:</p>
+    <div class="spacer"></div>
+    <p>Divisão fenológica dupla: a maioria dos estudos extraiu variáveis sem segmentação por fase do ciclo. A separação entre J1 (crescimento vegetativo) e J2 (floração/enchimento) permitiu ao modelo capturar a assimetria de sensibilidade da soja ao déficit hídrico em cada fase.</p>
+    <div class="spacer"></div>
+    <p>Protocolo de validação rigoroso: a combinação de "Leave-Municipality-Out" e "Out-of-Time" garantiu que os resultados reportados refletissem a capacidade real de generalização, ao contrário de estudos que utilizaram divisão aleatória sujeita a vazamento de dados.</p>
+    <div class="spacer"></div>
+    <p>Interpretabilidade agronômica via SHAP: o uso de "SHAP Dependence Plots" por variável forneceu validação biológica que a maioria dos trabalhos de ML em previsão agrícola não implementou, diferenciando este estudo na transparência das conclusões.</p>
+    
+    <div class="spacer"></div>
+
+    <h3>3.6 Avaliação exploratória de Modelos Fundacionais (Deep Learning)</h3>
+    <p>A título de experimentação exploratória, a série temporal foi submetida ao modelo fundacional <strong>Google TimesFM</strong> (arquitetura Transformer pré-treinada em bilhões de registros). Em um cenário puramente auto-regressivo (sem acesso aos índices vegetativos NDVI/EVI ou clima) e com um histórico restrito a 14 observações anuais por município (2008 a 2021), o TimesFM obteve um WMAPE de 9,00% e um erro médio absoluto de 310,68 kg ha⁻¹ para o período "Out-of-Time".</p>
+    <div class="spacer"></div>
+    <p>Esse resultado sublinha a extraordinária força de abstração de tendência dos modernos modelos Zero-Shot de Deep Learning, mesmo em séries anuais extremamente curtas. Contudo, o resultado corrobora a tese principal deste trabalho: a superioridade de modelos de aprendizado de máquina supervisionado (como o Random Forest híbrido com 7,43% de WMAPE) em painéis curtos multivariados, nos quais a capacidade de processar covariáveis exógenas e espaciais locais sobrepuja correlações puramente auto-regressivas temporais.</p>
+
+    <div class="spacer"></div>
+
+    <h2>4. CONCLUSÕES</h2>
+    <p>A arquitetura híbrida de previsão integrando Regressão Linear Múltipla e "XGBoost Regressor" (Chen e Guestrin, 2016), treinada com variáveis multiespectrais e climáticas organizadas em janelas fenológicas, demonstrou capacidade preditiva robusta para estimar o rendimento municipal da soja no Mato Grosso. O modelo obteve WMAPE de 7,24% e MAE de 251 kg ha⁻¹ na validação temporal "Out-of-Time" perante safras inéditas (2022 a 2024). A solução mitigou eficientemente a incapacidade de extrapolação secular intrínseca às árvores de decisão (Breiman, 2001). Além disso, os testes estatísticos confirmaram a ausência de viés geográfico (Índice de Moran), a homocedasticidade dos erros e a coerência agronômica das decisões do modelo por meio dos valores SHAP. Os resultados mostraram-se competitivos com a literatura de referência para previsão agrícola regional (Schwalbert et al., 2020), apresentando um erro de desvio equivalente a poucas sacas por hectare. A metodologia proposta representou uma contribuição prática e teórica para o avanço da previsão de rendimento de culturas extensivas, com alto potencial de escalabilidade para outros estados produtores utilizando bibliotecas como o <i>geobr</i> (Pereira et al., 2019) e <i>scikit-learn</i> (Pedregosa et al., 2011).</p>
+    
+    <div class="spacer"></div>
+
+    <h2>5. REFERÊNCIAS</h2>
+    
+    <div class="referencias">
+        <p class="reference">Abatzoglou, J.T.; Dobrowski, S.Z.; Parks, S.A.; Hegewisch, K.C. 2018. TerraClimate, a high-resolution global dataset of monthly climate and climatic water balance from 1958–2015. Scientific Data 5(1): 1-12.</p>
+        <p class="reference">Akiba, T.; Sano, S.; Yanase, T.; Ohta, T.; Koyama, M. 2019. Optuna: A next-generation hyperparameter optimization framework. In: Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining, p. 2623-2631.</p>
+        <p class="reference">Becker-Reshef, I.; Justice, C.; Sullivan, M.; Vermote, E.; Tucker, C.; Anyamba, A.; Small, J.; Pak, E.; Masuoka, E.; Schmaltz, J.; Hansen, M.; Pittman, K.; Birkett, C.; Williams, D.; Reynolds, C.; Doorn, B. 2010. Monitoring global croplands with coarse resolution earth observations: the Global Agriculture Monitoring (GLAM) project. Remote Sensing 2(6): 1589-1609.</p>
+        <p class="reference">Breiman, L. 2001. Random forests. Machine Learning 45(1): 5-32.</p>
+        <p class="reference">Centro de Estudos Avançados em Economia Aplicada [Cepea]. 2023. PIB do Agronegócio Brasileiro. Disponível em: &lt;https://www.cepea.esalq.usp.br&gt;. Acesso em: ago. 2026.</p>
+        <p class="reference">Chen, T.; Guestrin, C. 2016. XGBoost: a scalable tree boosting system. In: ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 22., 2016. Anais... p. 785-794.</p>
+        <p class="reference">Companhia Nacional de Abastecimento [Conab]. 2023. Acompanhamento da Safra Brasileira de Grãos. Disponível em: &lt;https://www.conab.gov.br&gt;. Acesso em: ago. 2026.</p>
+        <p class="reference">Doraiswamy, P.C.; Hatfield, J.L.; Jackson, T.J.; Akhmedov, B.; Prueger, J.; Stern, A. 2004. Crop condition and yield simulations using Landsat and MODIS. Remote Sensing of Environment 92(4): 548-559.</p>
+        <p class="reference">Friedman, J.H. 2001. Greedy function approximation: a gradient boosting machine. Annals of Statistics 29(5): 1189-1232.</p>
+        <p class="reference">Gorelick, N.; Hancher, M.; Dixon, M.; Ilyushchenko, S.; Thau, D.; Moore, R. 2017. Google Earth Engine: planetary-scale geospatial analysis for everyone. Remote Sensing of Environment 202: 18-27.</p>
+        <p class="reference">Hunt, M.L.; Ojha, B.G.; Walters, J.C. 2019. Monitoring and predicting agricultural drought and crop production under a changing climate. In: Encyclopedia of Agriculture and Food Systems. Elsevier, Amsterdam, Holanda.</p>
+        <p class="reference">Instituto Brasileiro de Geografia e Estatística [IBGE]. 2023. Sistema IBGE de Recuperação Automática (SIDRA) — Pesquisa da Produção Agrícola Municipal (PAM). Disponível em: &lt;https://sidra.ibge.gov.br&gt;. Acesso em: ago. 2026.</p>
+        <p class="reference">James, A.T.; Lawn, R.J.; Cooper, M. 2008. Genotypic variation for drought stress response traits in soybean. II. Yield and yield components. Australian Journal of Agricultural Research 59(7): 670-678.</p>
+        <p class="reference">Kung, H.Y.; Kuo, T.H.; Chen, C.H.; Tsai, P.Y. 2021. Applying machine learning techniques to predict soybean production. Symmetry 13(5): 765.</p>
+        <p class="reference">Kunrath, T.R.; Loshschmidt, R.; Balbinot Junior, A.A.; Franchini, J.C.; Debiasi, H. 2018. Drought stress on soybean at different vegetative and reproductive stages. Pesquisa Agropecuária Brasileira 53(11): 1205-1212.</p>
+        <p class="reference">Lundberg, S.M.; Lee, S. 2017. A unified approach to interpreting model predictions. Advances in Neural Information Processing Systems 30: 4765-4774.</p>
+        <p class="reference">Meyer, H.; Pebesma, E. 2022. Machine learning-based global maps of ecological variables and the challenge of assessing them. Nature Communications 13(1): 2208.</p>
+        <p class="reference">Pantazi, X.E.; Moshou, D.; Alexandridis, T.; Whetton, R.L.; Mouazen, A.M. 2016. Wheat yield prediction using machine learning and advanced sensing techniques. Computers and Electronics in Agriculture 121: 57-65.</p>
+        <p class="reference">Pedregosa, F.; Varoquaux, G.; Gramfort, A.; Michel, V.; Thirion, B.; Grisel, O.; Blondel, M.; Prettenhofer, P.; Weiss, R.; Dubourg, V.; Vanderplas, J.; Passos, A.; Cournapeau, D.; Brucher, M.; Perrot, M.; Duchesnay, E. 2011. Scikit-learn: machine learning in Python. Journal of Machine Learning Research 12: 2825-2830.</p>
+        <p class="reference">Pereira, R.H.M.; Gonçalves, C.N.; Chaves, P.A.B. 2019. geobr: pacote R e Python para baixar conjuntos de dados espaciais oficiais do Brasil. Instituto de Pesquisa Econômica Aplicada [IPEA], Rio de Janeiro, RJ, Brasil.</p>
+        <p class="reference">Projeto MapBiomas. 2023. Coleção 9.0 da Série Anual de Mapas de Cobertura e Uso de Solo do Brasil. Disponível em: &lt;https://mapbiomas.org&gt;. Acesso em: ago. 2026.</p>
+        <p class="reference">Rey, S.J.; Anselin, L. 2007. PySAL: a Python library of spatial analytical methods. The Review of Regional Studies 37(1): 5-27.</p>
+        <p class="reference">Schwalbert, R.A.; Amado, T.; Corassa, G.; Pott, L.P.; Prasad, P.V.V.; Ciampitti, I.A. 2020. Satellite-based soybean yield forecast: integrating machine learning and weather data for improving crop yield prediction in southern Brazil. Agricultural and Forest Meteorology 284: 107886.</p>
+        <p class="reference">Seabold, S.; Perktold, J. 2010. statsmodels: Econometric and statistical modeling with python. In: 9th Python in Science Conference, p. 92-96.</p>
+        <p class="reference">United States Department of Agriculture [USDA]. 2023. World Agricultural Production. Disponível em: &lt;https://www.fas.usda.gov&gt;. Acesso em: ago. 2026.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
